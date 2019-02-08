@@ -7,7 +7,7 @@
 UTFString::UTFString() {
   size_ = 0;
   length_ = 0;
-  byte_array_ = (char*)malloc(6 * sizeof(char));
+  byte_array_ = (char*)calloc(6, sizeof(char));
   capacity_ = 6;
 }
 
