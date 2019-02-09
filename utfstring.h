@@ -7,16 +7,27 @@
 class UTFString {
  public:
   UTFString();
+  UTFString(std::size_t capacity);
+  
+  UTFString(const char *other);
+  UTFString(const std::string& other);
+  UTFString(const UTFString& other);
+
+  UTFString& operator=(const std::string& other);
+  UTFString& operator=(const char* other);
+  UTFString& operator=(const UTFString& other);
 
   std::size_t size() const;  // byte usage
   bool empty() const;
   std::size_t length() const;  // number of distinguishable characters
   std::size_t capacity() const;
 
+  void reserve(std::size_t new_size);
+
   ~UTFString();
 
   bool is_ascii() const;
-  void to_c_str(char *buffer, int buffer_size) const;
+  void to_c_str(char *buffer, std::size_t buffer_size) const;
   std::string to_str() const;
   
  private:
