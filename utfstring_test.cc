@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <string.h>
+#include <stdexcept>
 
 static const char* empty_c_string = "\0";
 
@@ -132,6 +133,28 @@ void TestAssignmentFromAsciiOnlyUTFString() {
   assert(!strcmp(another_hello_message_buffer, hello_as_cppstr.c_str()));
 }
 
+void TestAsciiCharacterAccessBracketOperator() {
+  UTFString hello = "hello";
+  assert(hello[0] == 'h');
+  assert(hello[1] == 'e');
+  assert(hello[4] == 'o');
+}
+
+void TestAsciiCharacterAccessOutOfRangeException() {
+  bool exception_thrown = false;
+  UTFString hello = "hello";
+  assert(hello[0] == 'h');
+  try {
+    char c = hello[10];
+  } catch(const std::out_of_range& e) {
+    exception_thrown = true;
+  }
+  assert(exception_thrown);
+}
+
+// TODO: add accessor tests for front back
+// TODO: add tests for non ascii cahracters
+
 int main() {
   TestConstructEmptyString();
   TestConstructReservedString();
@@ -142,5 +165,7 @@ int main() {
   TestAssignmentFromCppString();
   TestAssignemntFromCString();
   TestAssignmentFromAsciiOnlyUTFString();
+  TestAsciiCharacterAccessBracketOperator();
+  TestAsciiCharacterAccessOutOfRangeException();
   return 0;
 }
