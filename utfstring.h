@@ -1,6 +1,16 @@
 #ifndef UTF_STRING_H
 #define UTF_STRING_H
 
+#ifdef _WIN32
+# ifdef WIN_EXPORT
+#  define EXPORTED __declspec( dllexport )
+# else
+#  define EXPORTED __declspec( dllexport )
+# endif
+#else
+# define EXPORTED
+#endif
+
 #include <stddef.h>
 #include <string>
 
