@@ -144,11 +144,12 @@ bool UTFString::is_ascii() const {
 }
 
 void UTFString::to_c_str(char* buffer, std::size_t buffer_size) const {
-  if (!buffer || buffer_size < size_ + 1) {
+  if (!buffer || buffer_size < size_ + 1 || size_ == 0) {
     *buffer = '\0';
+    return;
   }
   strncpy(buffer, byte_array_, size_);
-  buffer[size_ + 1] = '\0';
+  buffer[size_] = '\0';
 }
 
 std::string UTFString::to_str() const {

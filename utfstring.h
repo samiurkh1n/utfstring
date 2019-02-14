@@ -3,20 +3,20 @@
 
 #ifdef _WIN32
 # ifdef WIN_EXPORT
-#  define EXPORTED __declspec( dllexport )
+#  define UTFSTR_EXPORT __declspec( dllexport )
 # else
-#  define EXPORTED __declspec( dllexport )
+#  define UTFSTR_EXPORT __declspec( dllexport )
 # endif
 #else
-# define EXPORTED
+# define UTFSTR_EXPORT
 #endif
 
 #include <stddef.h>
 #include <string>
 
-enum class char_size { ONE, TWO, FOUR, UNKNOWN };
+enum class UTFSTR_EXPORT char_size { ONE, TWO, FOUR, UNKNOWN };
 
-class UTFString {
+class UTFSTR_EXPORT UTFString {
  public:
   UTFString();
   UTFString(std::size_t capacity);
@@ -65,5 +65,6 @@ class UTFString {
   // Number of bytes *used* in byte_array_ 
   std::size_t size_;
 };
+
 
 #endif  // UTF_STRING_H
